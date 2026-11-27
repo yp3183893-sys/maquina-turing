@@ -1,0 +1,41 @@
+/* Autor: Miguel Ignacio Palafox Félix - Grupo 301 - Tarea de Máquina de Turing
+ * examples.js — Copia embebida de examples/testMT.txt (Complemento a 2)
+ * para que se pueda probar con un clic, sin tener que subir el archivo.
+ */
+window.TM = window.TM || {};
+
+(function (TM) {
+  'use strict';
+
+  TM.EXAMPLES = {
+    complemento2: [
+      '###############################################################',
+      '#  Práctica: Máquina de Turing determinista de una sola cinta  #',
+      '#  Ejemplo: Complemento a 2 de un número binario              #',
+      '#  Autor: Miguel Ignacio Palafox Félix - Grupo 301            #',
+      '###############################################################',
+      '',
+      '# --- 7-tupla  M = (Q, Sigma, T, delta, q0, B, F) ---',
+      'Q={q0,q1,q2,q3}',
+      'Sigma={0,1}',
+      'T={0,1,%}',
+      'q0=q0',
+      'B=%',
+      'F={q3}',
+      '',
+      '# --- Transiciones  delta(q,X)=(p,Y,D)  (R=derecha, L=izquierda, S=se queda) ---',
+      '# q0: recorre toda la palabra hasta el blanco de la derecha',
+      'δ(q0,0)=(q0,0,R)',
+      'δ(q0,1)=(q0,1,R)',
+      'δ(q0,%)=(q1,%,L)',
+      '# q1: copia los bits tal cual hasta toparse con el primer 1 (ese 1 se conserva)',
+      'δ(q1,0)=(q1,0,L)',
+      'δ(q1,1)=(q2,1,L)',
+      'δ(q1,%)=(q3,%,S)',
+      '# q2: ya pasó el primer 1, ahora invierte todo lo que queda hacia la izquierda',
+      'δ(q2,0)=(q2,1,L)',
+      'δ(q2,1)=(q2,0,L)',
+      'δ(q2,%)=(q3,%,S)'
+    ].join('\n')
+  };
+})(window.TM);

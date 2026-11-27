@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Máquina de Turing — Simulador</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<!-- Autor: Miguel Ignacio Palafox Félix - Grupo 301 - Tarea de Máquina de Turing -->
+
+<header class="topbar">
+  <div class="brand">
+    <h1>Máquina de Turing</h1>
+    <p class="sub">Determinista · una sola cinta · simulación paso a paso</p>
+  </div>
+  <div class="topbar-right">
+    <span id="statusBadge" class="badge">Sin simulación</span>
+    <span id="stepCounter" class="counter">Paso 0</span>
+  </div>
+</header>
+
+<div id="messages" class="messages hidden"></div>
+
+<main class="layout">
+  <!-- Panel izquierdo -->
+  <aside class="col-left">
+
+    <section class="card">
+      <h2>1. Definición formal</h2>
+      <div id="dropzone" class="dropzone">
+        <input id="fileInput" type="file" accept=".txt,text/plain" hidden>
+        <button id="btnFile" class="btn primary" type="button">Subir archivo .txt</button>
+        <button id="btnExample" class="btn" type="button">Cargar ejemplo: Complemento a 2</button>
+        <p class="file-name">Archivo: <span id="fileName">(ninguno)</span></p>
+        <p class="hint">También puedes arrastrar y soltar el archivo <code>.txt</code> en este recuadro.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Formalización cargada</h2>
+      <div id="formalBody" class="formal">
+        <p class="muted">Sin definición cargada.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Transiciones δ</h2>
+      <div class="table-wrap trans-wrap">
+        <table class="table">
+          <thead>
+            <tr><th>Estado</th><th>Lee</th><th>→ Estado</th><th>Escribe</th><th>Mueve</th></tr>
+          </thead>
+          <tbody id="transBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </aside>
+
+  <!-- Panel derecho -->
+  <section class="col-right">
+
+    <section class="card">
+      <h2>2. Entrada y controles</h2>
+      <div class="controls-grid">
+        <label class="field">
+          <span>Palabra de entrada (símbolos de Σ)</span>
+          <input id="wordInput" type="text" value="0011" autocomplete="off" spellcheck="false">
+        </label>
+        <label class="field">
+          <span>Símbolo en blanco (B)</span>
+          <input id="blankInput" type="text" value="%" autocomplete="off" spellcheck="false">
+        </label>
+        <label class="field">
+          <span>Límite de pasos</span>
+          <input id="maxSteps" type="number" value="1000" min="1" max="100000" step="500">
+        </label>
+        <label class="field">
+          <span>Velocidad: <b id="speedLabel">300 ms/paso</b></span>
+          <input id="speed" type="range" min="30" max="1000" step="10" value="300">
+        </label>
+      </div>
+
+      <div class="buttons">
+        <button id="btnStep" class="btn" type="button">Paso a paso</button>
+        <button id="btnPlay" class="btn primary" type="button">Ejecutar</button>
+        <button id="btnReset" class="btn" type="button">Reiniciar</button>
+        <button id="btnEnd" class="btn" type="button">Hasta el final</button>
+      </div>
+
+      <p id="statusText" class="status-text">Carga una definición para comenzar.</p>
+      <p id="lastAction" class="last-action">—</p>
+    </section>
+
+    <section class="card">
+      <h2>3. Cinta (la flecha marca el cabezal)</h2>
+      <div class="tape-viewport">
+        <div id="tape" class="tape-strip">
+          <div class="tape-empty">Sin cinta. Carga una definición y una palabra.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>4. Historial de ejecución</h2>
+      <div class="table-wrap hist-wrap">
+        <table class="table">
+          <thead>
+            <tr><th>#</th><th>Estado</th><th>Lee</th><th>Transición aplicada</th><th>Nuevo estado</th></tr>
+          </thead>
+          <tbody id="historyBody">
+            <tr class="placeholder"><td colspan="5">Todavía no hay pasos ejecutados.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </section>
+</main>
+
+<script src="js/parser.js"></script>
+<script src="js/machine.js"></script>
+<script src="js/examples.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
